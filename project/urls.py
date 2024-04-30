@@ -15,9 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 from load.views import generate as load_generate
-from sha256.views import generate as sha256_generate
 
 urlpatterns = [
-    path('load', load_generate),
-    path('sha256', sha256_generate),
+    path('', load_generate),
 ]
