@@ -1,6 +1,8 @@
 # base image  
 FROM python:3.10-slim-bookworm
 
+ENV CPUS=1
+
 # buat user dan working directory
 ENV APP_HOME=/home/app/web
 RUN mkdir -p $APP_HOME
@@ -23,4 +25,4 @@ RUN pip install -r requirements.txt
 EXPOSE 8000
 
 # start server  
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000", "--nothreading"]
+CMD exec gunicorn --workers=$CPUS project.wsgi --bind 0.0.0.0:8000
